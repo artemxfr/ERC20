@@ -1,2 +1,3 @@
 # ERC20
-ERC20 tradable token
+
+Tradable (uniswap, PancakeSwap etc.) ERC20 complient token. 
