@@ -1,93 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.3;
-
-library SafeMath {
-    
-    function tryAdd(uint256 a, uint256 b) internal pure returns (bool, uint256) {
-        unchecked {
-            uint256 c = a + b;
-            if (c < a) return (false, 0);
-            return (true, c);
-        }
-    }
-    
-    function trySub(uint256 a, uint256 b) internal pure returns (bool, uint256) {
-        unchecked {
-            if (b > a) return (false, 0);
-            return (true, a - b);
-        }
-    }
-    
-    function tryMul(uint256 a, uint256 b) internal pure returns (bool, uint256) {
-        unchecked {
-            // Gas optimization: this is cheaper than requiring 'a' not being zero, but the
-            // benefit is lost if 'b' is also tested.
-            // See: https://github.com/OpenZeppelin/openzeppelin-contracts/pull/522
-            if (a == 0) return (true, 0);
-            uint256 c = a * b;
-            if (c / a != b) return (false, 0);
-            return (true, c);
-        }
-    }
-    
-    function tryDiv(uint256 a, uint256 b) internal pure returns (bool, uint256) {
-        unchecked {
-            if (b == 0) return (false, 0);
-            return (true, a / b);
-        }
-    }
-    
-    function tryMod(uint256 a, uint256 b) internal pure returns (bool, uint256) {
-        unchecked {
-            if (b == 0) return (false, 0);
-            return (true, a % b);
-        }
-    }
-
-    function add(uint256 a, uint256 b) internal pure returns (uint256) {
-        return a + b;
-    }
-
-
-    function sub(uint256 a, uint256 b) internal pure returns (uint256) {
-        return a - b;
-    }
-
-
-    function mul(uint256 a, uint256 b) internal pure returns (uint256) {
-        return a * b;
-    }
-    
-    function div(uint256 a, uint256 b) internal pure returns (uint256) {
-        return a / b;
-    }
-
-
-    function mod(uint256 a, uint256 b) internal pure returns (uint256) {
-        return a % b;
-    }
-    
-    function sub(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {
-        unchecked {
-            require(b <= a, errorMessage);
-            return a - b;
-        }
-    }
-    
-    function div(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {
-        unchecked {
-            require(b > 0, errorMessage);
-            return a / b;
-        }
-    }
-    
-    function mod(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {
-        unchecked {
-            require(b > 0, errorMessage);
-            return a % b;
-        }
-    }
-}
+pragma solidity 0.8.10;
 
 abstract contract Context {
     function _msgSender() internal view virtual returns (address) {
@@ -99,7 +11,6 @@ abstract contract Context {
         return msg.data;
     }
 }
-
 
 library Address {
     
@@ -487,14 +398,12 @@ interface IUniswapV2Router02 is IUniswapV2Router01 {
 }
 
 
-contract Token is Context, IERC20, Ownable {
+contract TestToken is Context, IERC20, Ownable {
 
-    using SafeMath for uint256;
-
-    uint256 private _totalSupply = 1*10**(9+18); // Total Supply of the token
-    string private _name = "Token"; // Name of the token
-    string private _symbol = "TEST"; // Symbol of the token
-    uint8 private _decimals = 18; // token decimals
+    uint256 private _totalSupply = 1*10**(9+18);
+    string private _name = "Test Token";
+    string private _symbol = "TEST";
+    uint8 private _decimals = 18;
 
     IUniswapV2Router02 public uniswapV2Router;
     address public uniswapV2Pair;
